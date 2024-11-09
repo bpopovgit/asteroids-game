@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import *
 from player import Player
 
 BLACK = (0, 0, 0)
@@ -21,6 +21,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
+        player.update(dt)
 
         # Clear the screen
         screen.fill(BLACK)
