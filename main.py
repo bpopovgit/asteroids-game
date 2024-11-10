@@ -3,6 +3,7 @@ from constants import *
 from player import Player
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
+from shot import Shot
 import sys
 
 BLACK = (0, 0, 0)
@@ -20,12 +21,14 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
 
     # Set the Asteroid containers field to automatically add instances to these groups
 
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
+    Shot.containers = (shots, updatable, drawable)
 
 
     # Calculate center position
@@ -48,8 +51,6 @@ def main():
 
     while True:
 
-        print("Main loop running...")
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -65,7 +66,6 @@ def main():
                 sys.exit()
 
         # Clear the screen
-        print("Clearing screen...")
         screen.fill(BLACK)
 
         # Draw all objects in the drawable group
@@ -76,12 +76,10 @@ def main():
 
 
         # Update the display
-        print("Flipping display...")
         pygame.display.flip()
 
         # Cap the frame rate and calculate delta time
         dt = clock.tick(60) / 1000  # Convert milliseconds to seconds for delta time
-        print(f"Frame time: {dt}")
 
 if __name__ == "__main__":
     main()
