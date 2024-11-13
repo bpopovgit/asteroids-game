@@ -59,7 +59,15 @@ def main():
         # Update all objects in the updatable group
         updatable.update(dt)
 
+        # Check for collisions between bullets and asteroids
         for asteroid in asteroids:
+            for bullet in shots:
+                # Using check_collision to detect if the bullet and asteroid collide
+                if bullet.check_collision(asteroid):
+                    asteroid.split()
+                    bullet.kill()
+                    break # Exiting the loop after killing the asteroid to avoid modifying a deleted object
+
             if player.check_collision(asteroid):
                 print("Game over!")
                 pygame.quit()
